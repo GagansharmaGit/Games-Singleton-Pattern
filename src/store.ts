@@ -5,4 +5,34 @@ interface Game{
     moves:string[];
 }
 
-export const games:Game[] = [];
+// export const games:Game[] = [];
+
+export class GameManager{
+    games:Game[] = [];
+    constructor(){
+        this.games=[];
+    }
+
+    addMove(gameId:string, move:string){
+        // console.log(`Adding move ${move} to Game ${gameId}`);
+        const game = this.games.find((game)=>game.id === gameId);
+        game?.moves.push(move);
+    }
+
+    addGame(gameId:string){
+        const game = {
+                id:gameId,
+                WhitePlayerName:"Gagan Sharma",
+                BlackPlayerName:"Pulkit Sharma",
+                moves:[]
+        }
+        this.games.push(game);
+    }
+
+    logGames(){
+        console.log(this.games);
+    }
+
+}
+
+export const gameManager = new GameManager();//exporting only single object for everyone to make sure to remove another objects creation and also reduce circular dependency between files
