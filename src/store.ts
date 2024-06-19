@@ -5,16 +5,22 @@ interface Game{
     moves:string[];
 }
 
-// export const games:Game[] = [];
-
 export class GameManager{
     games:Game[] = [];
-    constructor(){
+    private static instance:GameManager
+    private constructor(){
         this.games=[];
     }
 
+    static getInstance(){
+        if(GameManager.instance){
+            return GameManager.instance;
+        }
+        return GameManager.instance = new GameManager();
+    }
+
     addMove(gameId:string, move:string){
-        // console.log(`Adding move ${move} to Game ${gameId}`);
+        console.log(`Adding move ${move} to Game ${gameId}`);
         const game = this.games.find((game)=>game.id === gameId);
         game?.moves.push(move);
     }
@@ -34,5 +40,3 @@ export class GameManager{
     }
 
 }
-
-export const gameManager = new GameManager();//exporting only single object for everyone to make sure to remove another objects creation and also reduce circular dependency between files

@@ -1,14 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.gameManager = exports.GameManager = void 0;
-// export const games:Game[] = [];
+exports.GameManager = void 0;
 class GameManager {
     constructor() {
         this.games = [];
         this.games = [];
     }
+    static getInstance() {
+        if (GameManager.instance) {
+            return GameManager.instance;
+        }
+        return GameManager.instance = new GameManager();
+    }
     addMove(gameId, move) {
-        // console.log(`Adding move ${move} to Game ${gameId}`);
+        console.log(`Adding move ${move} to Game ${gameId}`);
         const game = this.games.find((game) => game.id === gameId);
         game === null || game === void 0 ? void 0 : game.moves.push(move);
     }
@@ -26,4 +31,3 @@ class GameManager {
     }
 }
 exports.GameManager = GameManager;
-exports.gameManager = new GameManager(); //exporting only single object for everyone to make sure to remove another objects creation and also reduce circular dependency between files
